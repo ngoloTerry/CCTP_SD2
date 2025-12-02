@@ -60,12 +60,27 @@ class GrapheNOPLS:
     # 10) 
     def degre(self, x):
         return len(self.voisins(x))
-    
+
     # 11) affiche
     def affiche(self):
         print("Enesemble des sommets: "+self.sommets())
         for elm in self.dict:
             print("Le sommet "+elm+" a pour voisins: "+ self.voisins(elm))
+    # Exo2
+    # Fonction lesAretes
+    def lesAretes(self): # les aretes sont toutes les paires "clé-élément" du dico
+        res = []
+        for cle in self.sommets():
+            for elm in self.sommets():
+                if elm in self.dict[cle]: # pas la peine de gérer les doublons: ce sont des aretes pas des arcs.
+                    res.append((cle,elm, self.poids(cle,elm)))
 
-# Exo2
+
+    # Fonction SupprArc
+    def supprimeArete(self,x,y): # supprimer une arete = enlever l'element de la clé, des deux côtés.
+        assert y in x, "supprimeArete: l'arete ("+str(x)+","+str(y)+") n'existe pas."
+        assert x in y, "supprimeArete: l'arete ("+str(y)+","+str(x)+") n'existe pas."
+
+        del self.dict[x][y]
+        del self.dict[y][x]
 

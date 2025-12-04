@@ -84,3 +84,30 @@ class GrapheNOPLS:
         del self.dict[x][y]
         del self.dict[y][x]
 
+#Codage de l'algoritme de Kruskal
+
+# Exercice 3: 
+# Détection des cycles dans le graph
+    def existeCycle(self,x): 
+        # sommets verts = en cours d'analyse de ses voisins
+            vert = []
+
+        # sommets bleus = pas encore visités (par défaut, tous les sommets sont des sommets non-visités.)
+            bleu = self.sommets()
+
+        # sommets rouges = tous les voisins visités
+            rouge = []
+
+            def deplace_som(tab1,tab2,som): # enlève un elm de tab1 et l'ajoute dans tab2.
+                assert som in tab1, "deplace_som: le sommet n'est pas dans tab1"
+                assert som in tab2, "deplace_som: le sommet n'est pas dans tab2"
+
+                tab2.append(som)
+                del tab1(som)
+
+        
+
+            
+
+
+        

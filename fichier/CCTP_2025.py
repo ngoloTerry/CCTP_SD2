@@ -49,6 +49,12 @@ class GrapheNOPLS:
         res = self.predecesseurs(x) + self.successeurs(x)
         return res
     
+    # supplémentaire personnel) retourne si oui ou non deux sommets sont voisins
+    def estVoisin(self, x, y):
+        if y in self.voisins(x):
+            return True
+        return False
+    
     # 8)
     def degreSortant(self, x):
         return len(self.successeurs(x))
@@ -86,25 +92,52 @@ class GrapheNOPLS:
 
 #Codage de l'algoritme de Kruskal
 
-# Exercice 3: 
-# Détection des cycles dans le graph
+# Exercice 3: Détection des cycles dans le graph
+
+
     def existeCycle(self,x): 
-        # sommets verts = en cours d'analyse de ses voisins
-            vert = []
+    # file des elements 
 
-        # sommets bleus = pas encore visités (par défaut, tous les sommets sont des sommets non-visités.)
-            bleu = self.sommets()
 
-        # sommets rouges = tous les voisins visités
-            rouge = []
+    # sommets verts = en cours d'analyse de ses voisins
+        file_verts = [x]
 
-            def deplace_som(tab1,tab2,som): # enlève un elm de tab1 et l'ajoute dans tab2.
-                assert som in tab1, "deplace_som: le sommet n'est pas dans tab1"
-                assert som in tab2, "deplace_som: le sommet n'est pas dans tab2"
+    # sommets bleus = pas encore visités (par défaut, tous les sommets sont des sommets non-visités)
+        bleu = self.sommets()
 
-                tab2.append(som)
-                del tab1(som)
+    # sommets rouges = tous les voisins visités
+    # Un sommet est rouge, si tous ses voisins sont verts
+        rouge = []
 
+        def deplace_som(tab1,tab2,som): # enlève un elm de tab1 et l'ajoute dans tab2
+            assert som in tab1, "deplace_som: le sommet n'est pas dans tab1"
+            assert som in tab2, "deplace_som: le sommet n'est pas dans tab2"
+            elm=tab1.pop(som)
+            tab2.append(tab1)
+
+
+            
+        # On part des sommets verts
+        while len(bleu)>0:
+            
+            # On traite le premier
+            # On vérifie ses voisins
+                for elm in file_verts:
+                    if self.estVoisin(file_verts[0], elm):
+                        return True
+                # Sinon on continue
+                # on ajoute ses voisins dans la file
+                for voisin in file_verts([0]):
+                    deplace_som(bleu, file_verts, voisin)
+
+                # on défile file_verts
+                # le vert selectionné devient rouge si on a checké tous ses voisins
+                deplace_som(file_verts, rouge, file_verts[0])
+
+
+
+
+        # autrement, on change les sommets verts en sommets rouges, et les voisins initialement bleus deviennent verts.
         
 
             
